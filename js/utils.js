@@ -841,7 +841,7 @@ const anzhiyu = {
   },
   // 获取自定义播放列表
   getCustomPlayList: function () {
-    if (!window.location.pathname.startsWith("/music/")) {
+    if (!window.location.pathname.startsWith("/music/") && !window.location.pathname.startsWith("/blog/music/")) {
       return;
     }
     const urlParams = new URLSearchParams(window.location.search);
@@ -859,7 +859,7 @@ const anzhiyu = {
   },
   // 获取自定义电台播放列表
   getCustomRadioPlayList: function () {
-    if (!window.location.pathname.startsWith("/radio/")) {
+    if (!window.location.pathname.startsWith("/radio/") && !window.location.pathname.startsWith("/blog/radio/")) {
       return;
     }
     const urlParams = new URLSearchParams(window.location.search);
@@ -906,7 +906,7 @@ const anzhiyu = {
     });
 
     function anMusicPageMenuAask() {
-      if (window.location.pathname != "/music/" && window.location.pathname !="/radio/") {
+      if (!window.location.pathname = "/music/" && !window.location.pathname ="/radio/" && !window.location.pathname = "/blog/music/" && !window.location.pathname ="/blog/radio/") {
         document.getElementById("menu-mask").removeEventListener("click", anMusicPageMenuAask);
         return;
       }
