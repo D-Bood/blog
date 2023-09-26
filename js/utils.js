@@ -906,7 +906,7 @@ const anzhiyu = {
     });
 
     function anMusicPageMenuAask() {
-      if (!window.location.pathname = "/music/" && !window.location.pathname ="/radio/" && !window.location.pathname = "/blog/music/" && !window.location.pathname ="/blog/radio/") {
+      if (window.location.pathname != "/music/" && window.location.pathname !="/radio/" && window.location.pathname != "/blog/music/" && window.location.pathname !="/blog/radio/") {
         document.getElementById("menu-mask").removeEventListener("click", anMusicPageMenuAask);
         return;
       }
