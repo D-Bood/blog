@@ -4277,7 +4277,6 @@ body[data-type='about'] #web_bg {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   height: -webkit-fill-available;
-  height: 40%;
 }
 .author-content-item.selfInfo div {
   display: -webkit-box;
