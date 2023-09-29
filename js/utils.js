@@ -841,7 +841,7 @@ const anzhiyu = {
   },
   // 获取自定义播放列表
   getCustomPlayList: function () {
-    if (!window.location.pathname.startsWith("/music/") && !window.location.pathname.startsWith("/blog/music/")) {
+    if (!window.location.pathname.startsWith("/music/")) {
       return;
     }
     const urlParams = new URLSearchParams(window.location.search);
@@ -851,15 +851,15 @@ const anzhiyu = {
     if (urlParams.get("id") && urlParams.get("server")) {
       const id = urlParams.get("id");
       const server = urlParams.get("server");
-      anMusicPageMeting.innerHTML = `<meting-js id="${id}" server=${server} type="playlist" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${id}" server=${server} type="playlist" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="music"></meting-js>`;
     } else {
-      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="music"></meting-js>`;
     }
     anzhiyu.changeMusicBg(false);
   },
   // 获取自定义电台播放列表
   getCustomRadioPlayList: function () {
-    if (!window.location.pathname.startsWith("/radio/") && !window.location.pathname.startsWith("/blog/radio/")) {
+    if (!window.location.pathname.startsWith("/radio/")) {
       return;
     }
     const urlParams = new URLSearchParams(window.location.search);
@@ -867,9 +867,9 @@ const anzhiyu = {
     const anMusicPageMeting = document.getElementById("anMusic-page-meting");
     if (urlParams.get("id")) {
       const id = urlParams.get("id");
-      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio" lrcType="1"></meting-js>`;
     } else {
-      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio" lrcType="1"></meting-js>`;
     }
     anzhiyu.changeMusicBg(false);
   },
