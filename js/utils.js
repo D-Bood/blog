@@ -867,9 +867,9 @@ const anzhiyu = {
     const anMusicPageMeting = document.getElementById("anMusic-page-meting");
     if (urlParams.get("id")) {
       const id = urlParams.get("id");
-      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio" lrcType="1"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio"></meting-js>`;
     } else {
-      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio" lrcType="1"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio"></meting-js>`;
     }
     anzhiyu.changeMusicBg(false);
   },
