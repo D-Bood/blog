@@ -1,3 +1,11 @@
+/**
+ *  MetingJS for D-Bood's Blog
+ *  Only use in hexo-theme-anzhiyu
+ *  Thanks: metowolf, 安知鱼
+ *  Modified by D-Bood
+ *  Released under the MIT license
+ *  I am appreciated if you could optimize the code and tell me that.
+ **/
 class MetingJSElement extends HTMLElement {
 
   connectedCallback() {
@@ -45,6 +53,7 @@ class MetingJSElement extends HTMLElement {
 
     this.api = this.meta.api || window.meting_api || 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r'
     this.pllstapi = 'https://netease.project.ac.cn/dj/:type?rid=:id&r=:r'
+    this.skipLoadPlayer = false
     if (this.meta.auto) this._parse_link()
   }
 
@@ -108,7 +117,17 @@ class MetingJSElement extends HTMLElement {
 
     fetch(url)
       .then(res => res.json())
-      .then(result => this._loadPlayer(result))
+      .then(result => {
+        if (this.skipLoadPlayer) {
+          const anMusicPage = document.getElementById("anMusic-page")
+          const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
+          metingAplayer.list.clear()
+          metingAplayer.list.add(result)
+          this.skipLoadPlayer = !this.skipLoadPlayer
+        } else {
+          this._loadPlayer(result)
+        }
+      })
   }
 
   async _fetchRadioPlaylist() {
@@ -148,9 +167,15 @@ class MetingJSElement extends HTMLElement {
         djplaylist.push(count)
       }
       setTimeout(() => {
-        this._loadPlayer(djplaylist),
-        3000
-      })
+        if (this.skipLoadPlayer) {
+          const anMusicPage = document.getElementById("anMusic-page")
+          const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
+          metingAplayer.list.clear()
+          metingAplayer.list.add(djplaylist)
+          this.skipLoadPlayer = !this.skipLoadPlayer
+        } else {
+          this._loadPlayer(djplaylist)
+        }},3000)
     })
   }
 
@@ -195,14 +220,11 @@ class MetingJSElement extends HTMLElement {
     const anMusicBtnGetSong = anMusicPage.querySelector("#anMusicBtnGetSong")
     const anMusicRefreshBtn = anMusicPage.querySelector("#anMusicRefreshBtn")
     const anMusicSwitchingBtn = anMusicPage.querySelector("#anMusicSwitching")
-    anMusicBtnGetSong.onclick = () => {this._randomPlay(anMusicPage)
-      anzhiyu.changeMusicBg(false)}
-    anMusicRefreshBtn.onclick = () => {this._refreshPlaylist(anMusicPage)
-      anzhiyu.changeMusicBg(false)}
+    anMusicBtnGetSong.onclick = () => {this._randomPlay(anMusicPage)}
+    anMusicRefreshBtn.onclick = () => {this._refreshPlaylist(anMusicPage)}
     anMusicSwitchingBtn.onclick = () => {
       if (window.location.pathname == '/music/') {this._changeMusicList('/json/music.json', 'musicDataList')}
       if (window.location.pathname == '/radio/') {this._changeMusicList('/json/radio.json', 'radioDataList')}
-      anzhiyu.changeMusicBg(false)
       }
   }
   async _changeMusicList(url, dataname) {
@@ -210,6 +232,8 @@ class MetingJSElement extends HTMLElement {
     const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
     const currentTime = new Date().getTime()
     const cacheData = JSON.parse(localStorage.getItem(dataname)) || {timestamp: 0}
+    this.skipLoadPlayer = true
+    anzhiyu.snackbarShow("播放列表正在切换中，请稍候")
     let lists = []
     let songs = []
     if (currentTime - cacheData.timestamp < 24 * 60 * 60 * 1000) {
@@ -227,23 +251,18 @@ class MetingJSElement extends HTMLElement {
       lists = cacheData.lists
       songs = cacheData.songs
     }
-    window.alert('执行前changeMusicCounter：' + changeMusicCounter)
-    window.alert('执行前changeRadioCounter：' + changeRadioCounter)
-    window.alert('执行前changeMusicListFlag：' + changeMusicListFlag)
     if (window.location.pathname == '/music/') {
       if (songs.length > 0 && changeMusicListFlag) {
+        this.meta.type = 'custom'
         metingAplayer.list.clear()
         metingAplayer.list.add(songs)
         changeMusicListFlag = false
+        anzhiyu.snackbarShow("该列表为博主自定义播放列表")
       } else {
-        this.aplayer.destroy()
         this.meta.type = lists[changeMusicCounter].type
         this.meta.id = lists[changeMusicCounter].id
         this.meta.server = lists[changeMusicCounter].server
         changeMusicCounter = changeMusicCounter + 1
-        window.alert('执行后this.meta.type：' + this.meta.type)
-        window.alert('执行后this.meta.id：' + this.meta.id)
-        window.alert('执行后changeMusicCounter：' + changeMusicCounter)
         if (changeMusicCounter >= lists.length) {
           changeMusicCounter = 0
           changeMusicListFlag = true
@@ -251,14 +270,9 @@ class MetingJSElement extends HTMLElement {
         this._parseMusic()
       }
     } else if (window.location.pathname == '/radio/') {
-      this.aplayer.destroy()
       this.meta.type = lists[changeRadioCounter].type
       this.meta.id = lists[changeRadioCounter].id
-      this.meta.server = lists[changeRadioCounter].server
       changeRadioCounter = changeRadioCounter + 1
-      window.alert('执行后this.meta.type：' + this.meta.type)
-      window.alert('执行后this.meta.id：' + this.meta.id)
-      window.alert('执行后changeRadioCounter：' + changeRadioCounter)
       if (changeRadioCounter >= lists.length) {changeRadioCounter = 0}
       this._parseRadio()
     }
@@ -271,14 +285,13 @@ class MetingJSElement extends HTMLElement {
     metingAplayer.list.switch(randomIndex)
   }
   _refreshPlaylist(anMusicPage) {
-    const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
-    localStorage.removeItem("RADIOON.logger")
-    metingAplayer.list.clear()
-    this.aplayer.destroy()
-    window.alert(this.meta.type + this.meta.id)
-    anzhiyu.snackbarShow("播放列表正在刷新中")
-    if (window.location.pathname == '/music/') {this._parseMusic()}
-    if (window.location.pathname == '/radio/') {this._parseRadio()}
+    this.skipLoadPlayer = true
+    if (this.meta.type == 'custom') {anzhiyu.snackbarShow("非常抱歉，自定义播放列表暂不支持刷新操作")}
+    else {
+      anzhiyu.snackbarShow("播放列表正在刷新中，请稍候")
+      if (window.location.pathname == '/music/') {this._parseMusic()}
+      if (window.location.pathname == '/radio/') {this._parseRadio()}
+    }
   }
 }
 
