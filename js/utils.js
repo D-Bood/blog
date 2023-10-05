@@ -743,30 +743,30 @@ const anzhiyu = {
     document.getElementById("loading-box").classList.add("loaded");
   },
   // 将音乐缓存播放
-  cacheAndPlayMusic() {
-    let data = localStorage.getItem("musicData");
-    if (data) {
-      data = JSON.parse(data);
-      const currentTime = new Date().getTime();
-      if (currentTime - data.timestamp < 24 * 60 * 60 * 1000) {
+  // cacheAndPlayMusic() {
+  //   let data = localStorage.getItem("musicData");
+  //   if (data) {
+  //     data = JSON.parse(data);
+  //     const currentTime = new Date().getTime();
+  //     if (currentTime - data.timestamp < 24 * 60 * 60 * 1000) {
         // 如果缓存的数据没有过期，直接使用
-        anzhiyu.playMusic(data.songs);
-        return;
-      }
-    }
+  //       anzhiyu.playMusic(data.songs);
+  //       return;
+   //    }
+  //   }
 
     // 否则重新从服务器获取数据
-    fetch("/json/music.json")
-      .then(response => response.json())
-      .then(songs => {
-        const cacheData = {
-          timestamp: new Date().getTime(),
-          songs: songs,
-        };
-        localStorage.setItem("musicData", JSON.stringify(cacheData));
-        anzhiyu.playMusic(songs);
-      });
-  },
+  //   fetch("/json/music.json")
+  //     .then(response => response.json())
+  //     .then(songs => {
+  //       const cacheData = {
+  //         timestamp: new Date().getTime(),
+  //         songs: songs,
+  //       };
+  //       localStorage.setItem("musicData", JSON.stringify(cacheData));
+  //       anzhiyu.playMusic(songs);
+  //     });
+  // },
   // 播放音乐
   playMusic(songs) {
     const anMusicPage = document.getElementById("anMusic-page");
@@ -917,25 +917,25 @@ const anzhiyu = {
     document.getElementById("menu-mask").addEventListener("click", anMusicPageMenuAask);
 
     // 监听增加单曲按钮
-    anMusicBtnGetSong.addEventListener("click", () => {
-      if (changeMusicListFlag) {
-        const anMusicPage = document.getElementById("anMusic-page");
-        const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
-        const allAudios = metingAplayer.list.audios;
-        const randomIndex = Math.floor(Math.random() * allAudios.length);
+    // anMusicBtnGetSong.addEventListener("click", () => {
+    //   if (changeMusicListFlag) {
+    //     const anMusicPage = document.getElementById("anMusic-page");
+    //     const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
+    //     const allAudios = metingAplayer.list.audios;
+    //     const randomIndex = Math.floor(Math.random() * allAudios.length);
         // 随机播放一首
-        metingAplayer.list.switch(randomIndex);
-      } else {
-        anzhiyu.cacheAndPlayMusic();
-      }
-    });
-    anMusicRefreshBtn.addEventListener("click", () => {
-      localStorage.removeItem("musicData");
-      anzhiyu.snackbarShow("已移除相关缓存歌曲");
-    });
-    anMusicSwitchingBtn.addEventListener("click", () => {
-      anzhiyu.changeMusicList();
-    });
+    //     metingAplayer.list.switch(randomIndex);
+    //   } else {
+    //    anzhiyu.cacheAndPlayMusic();
+    //   }
+    // });
+    // anMusicRefreshBtn.addEventListener("click", () => {
+    //   localStorage.removeItem("musicData");
+    //   anzhiyu.snackbarShow("已移除相关缓存歌曲");
+    // });
+    // anMusicSwitchingBtn.addEventListener("click", () => {
+    //   anzhiyu.changeMusicList();
+    // });
 
     // 监听键盘事件
     //空格控制音乐
@@ -972,38 +972,38 @@ const anzhiyu = {
     });
   },
   // 切换歌单
-  changeMusicList: async function () {
-    const anMusicPage = document.getElementById("anMusic-page");
-    const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
-    const currentTime = new Date().getTime();
-    const cacheData = JSON.parse(localStorage.getItem("musicData")) || { timestamp: 0 };
-    let songs = [];
+  // changeMusicList: async function () {
+  //   const anMusicPage = document.getElementById("anMusic-page");
+  //   const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
+  //   const currentTime = new Date().getTime();
+  //   const cacheData = JSON.parse(localStorage.getItem("musicData")) || { timestamp: 0 };
+  //   let songs = [];
 
-    if (changeMusicListFlag) {
-      songs = defaultPlayMusicList;
-    } else {
+  //   if (changeMusicListFlag) {
+  //     songs = defaultPlayMusicList;
+  //   } else {
       // 保存当前默认播放列表，以使下次可以切换回来
-      defaultPlayMusicList = metingAplayer.list.audios;
+  //     defaultPlayMusicList = metingAplayer.list.audios;
       // 如果缓存的数据没有过期，直接使用
-      if (currentTime - cacheData.timestamp < 24 * 60 * 60 * 1000) {
-        songs = cacheData.songs;
-      } else {
+  //     if (currentTime - cacheData.timestamp < 24 * 60 * 60 * 1000) {
+  //       songs = cacheData.songs;
+  //     } else {
         // 否则重新从服务器获取数据
-        const response = await fetch("/json/music.json");
-        songs = await response.json();
-        cacheData.timestamp = currentTime;
-        cacheData.songs = songs;
-        localStorage.setItem("musicData", JSON.stringify(cacheData));
-      }
-    }
+  //       const response = await fetch("/json/music.json");
+  //       songs = await response.json();
+  //       cacheData.timestamp = currentTime;
+  //       cacheData.songs = songs;
+  //       localStorage.setItem("musicData", JSON.stringify(cacheData));
+  //     }
+  //   }
 
     // 清除当前播放列表并添加新的歌曲
-    metingAplayer.list.clear();
-    metingAplayer.list.add(songs);
+  //   metingAplayer.list.clear();
+  //   metingAplayer.list.add(songs);
 
     // 切换标志位
-    changeMusicListFlag = !changeMusicListFlag;
-  },
+  //   changeMusicListFlag = !changeMusicListFlag;
+  // },
   // 控制台音乐列表监听
   addEventListenerConsoleMusicList: function () {
     const navMusic = document.getElementById("nav-music");
