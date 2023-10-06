@@ -216,16 +216,18 @@ class MetingJSElement extends HTMLElement {
   }
   
   _listenButton() {
-    const anMusicPage = document.getElementById("anMusic-page")
-    const anMusicBtnGetSong = anMusicPage.querySelector("#anMusicBtnGetSong")
-    const anMusicRefreshBtn = anMusicPage.querySelector("#anMusicRefreshBtn")
-    const anMusicSwitchingBtn = anMusicPage.querySelector("#anMusicSwitching")
-    anMusicBtnGetSong.onclick = () => {this._randomPlay(anMusicPage)}
-    anMusicRefreshBtn.onclick = () => {this._refreshPlaylist(anMusicPage)}
-    anMusicSwitchingBtn.onclick = () => {
-      if (window.location.pathname == '/music/') {this._changeMusicList('/json/music.json', 'musicDataList')}
-      if (window.location.pathname == '/radio/') {this._changeMusicList('/json/radio.json', 'radioDataList')}
+    if (window.location.pathname == '/music/' || window.location.pathname == '/radio/') {
+      const anMusicPage = document.getElementById("anMusic-page")
+      const anMusicBtnGetSong = anMusicPage.querySelector("#anMusicBtnGetSong")
+      const anMusicRefreshBtn = anMusicPage.querySelector("#anMusicRefreshBtn")
+      const anMusicSwitchingBtn = anMusicPage.querySelector("#anMusicSwitching")
+      anMusicBtnGetSong.onclick = () => {this._randomPlay(anMusicPage)}
+      anMusicRefreshBtn.onclick = () => {this._refreshPlaylist(anMusicPage)}
+      anMusicSwitchingBtn.onclick = () => {
+        if (window.location.pathname == '/music/') {this._changeMusicList('/json/music.json', 'musicDataList')}
+        if (window.location.pathname == '/radio/') {this._changeMusicList('/json/radio.json', 'radioDataList')}
       }
+    }
   }
   async _changeMusicList(url, dataname) {
     const anMusicPage = document.getElementById("anMusic-page")
