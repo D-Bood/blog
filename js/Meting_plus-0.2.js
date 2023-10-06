@@ -52,7 +52,7 @@ class MetingJSElement extends HTMLElement {
     this.config = config
 
     this.api = this.meta.api || window.meting_api || 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r'
-    this.pllstapi = 'https://netease.project.ac.cn/dj/:type?rid=:id&r=:r'
+    this.pllstapi = 'https://mu-api.yuk0.com/dj/:type?rid=:id&r=:r'
     this.skipLoadPlayer = false
     if (this.meta.auto) this._parse_link()
   }
@@ -156,7 +156,7 @@ class MetingJSElement extends HTMLElement {
         count['pic'] = pllstdata.programs[i].coverUrl
         count['title'] = pllstdata.programs[i].name
         this.rid = pllstdata.programs[i].mainTrackId
-        let songurl = 'https://netease.project.ac.cn/song/url?id=:rid&r=:r'
+        let songurl = 'https://mu-api.yuk0.com/song/url?id=:rid&r=:r'
           .replace(':rid', this.rid)
           .replace(':r', Math.random())
         fetch(songurl)
