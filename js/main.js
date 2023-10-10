@@ -147,8 +147,8 @@ var vegetablesAndFruits = [
 var selectRandomSong = [];
 // 音乐默认声音大小
 var musicVolume = 0.8;
-// 是否切换了周杰伦音乐列表
-var changeMusicListFlag = false;
+// 是否要切换本地播放列表
+var changeMusicListFlag = true;
 var changeMusicCounter = 0;
 var changeRadioCounter = 0;
 // 当前默认播放列表
