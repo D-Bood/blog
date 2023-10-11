@@ -123,7 +123,6 @@ class MetingJSElement extends HTMLElement {
           const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
           metingAplayer.list.clear()
           metingAplayer.list.add(result)
-          this.skipLoadPlayer = !this.skipLoadPlayer
         } else {
           this._loadPlayer(result)
         }
@@ -166,16 +165,14 @@ class MetingJSElement extends HTMLElement {
           })
         djplaylist.push(count)
       }
-      setTimeout(() => {
         if (this.skipLoadPlayer) {
           const anMusicPage = document.getElementById("anMusic-page")
           const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
           metingAplayer.list.clear()
           metingAplayer.list.add(djplaylist)
-          this.skipLoadPlayer = !this.skipLoadPlayer
         } else {
           this._loadPlayer(djplaylist)
-        }},3000)
+        }
     })
   }
 

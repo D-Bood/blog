@@ -4996,9 +4996,10 @@ body[data-type='about'] #web_bg {
   box-shadow: var(--anzhiyu-shadow-border);
 }
 .skills .skill-icon img {
-  width: 18px;
-  height: 18px;
+  width: 32px;
+  height: 32px;
   margin: 0 auto !important;
+  border-radius: 32px;
 }
 .skills .skills-style-group {
   position: relative;
@@ -27694,8 +27695,9 @@ div#runtime {
   border-radius: 30px;
 }
 #skills-tags-group-all .tags-group-icon img {
-  width: 60px;
+  width: 120px;
   margin: 0 auto !important;
+  border-radius: 30px;
 }
 [data-theme="dark"] #skills-tags-group-all .tags-group-icon img {
   filter: none;
