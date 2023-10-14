@@ -7784,7 +7784,7 @@ body:has(#console.show) #nav-music {
 #anMusic-page meting-js .aplayer .aplayer-body .aplayer-info .aplayer-lrc p {
   font-size: 20px;
   line-height: 20px !important;
-  height: 20px !important;
+  height: 100% !important;
   margin: 20px 0 !important;
   color: #fff;
 }
