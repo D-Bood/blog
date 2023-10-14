@@ -819,11 +819,11 @@
                                 key: "update",
                                 value: function () {
                                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : this.player.audio.currentTime;
+                                    let lrcHeight = 0;
                                     if (this.index > this.current.length - 1 || e < this.current[this.index][0] || !this.current[this.index + 1] || e >= this.current[this.index + 1][0]) {
-                                        let lrcHeight = 0;
                                         for (let t = 0; t < this.current.length; t++) {
-                                            (t == 0) ? lrcHeight = 0 : lrcHeight = lrcHeight + this.container.getElementsByTagName("p")[t-1].offsetHeight;
-                                            e >= this.current[t][0] && (!this.current[t + 1] || e < this.current[t + 1][0]) && (this.index = t, this.container.style.transform = "translateY(" + (-lrcHeight - 20 * t) + "px)", this.container.style.webkitTransform = "translateY(" + (-lrcHeight - 20 * t) + "px)", this.container.getElementsByClassName("aplayer-lrc-current")[0].classList.remove("aplayer-lrc-current"), this.container.getElementsByTagName("p")[t].classList.add("aplayer-lrc-current"))
+                                            t == 0 ? lrcHeight = 0 : lrcHeight = lrcHeight + this.container.getElementsByTagName("p")[t - 1].offsetHeight
+                                            e >= this.current[t][0] && (!this.current[t + 1] || e < this.current[t + 1][0]) && (this.container.style.transform = "translateY(" + (-lrcHeight - 20 * t) + "px)", this.container.style.webkitTransform = "translateY(" + (-lrcHeight - 20 * t) + "px)", this.container.getElementsByClassName("aplayer-lrc-current")[0].classList.remove("aplayer-lrc-current"), this.container.getElementsByTagName("p")[t].classList.add("aplayer-lrc-current"))
                                         }
                                     }
                                 }
