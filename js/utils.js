@@ -851,9 +851,9 @@ const anzhiyu = {
     if (urlParams.get("id") && urlParams.get("server")) {
       const id = urlParams.get("id");
       const server = urlParams.get("server");
-      anMusicPageMeting.innerHTML = `<meting-js id="${id}" server=${server} type="playlist" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="music"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${id}" server=${server} type="playlist" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 250px)!important" choice="music"></meting-js>`;
     } else {
-      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="music"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 250px)!important" choice="music"></meting-js>`;
     }
     anzhiyu.changeMusicBg(false);
   },
@@ -867,9 +867,9 @@ const anzhiyu = {
     const anMusicPageMeting = document.getElementById("anMusic-page-meting");
     if (urlParams.get("id")) {
       const id = urlParams.get("id");
-      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 250px)!important" choice="radio"></meting-js>`;
     } else {
-      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 169px)!important" choice="radio"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 250px)!important" choice="radio"></meting-js>`;
     }
     anzhiyu.changeMusicBg(false);
   },
@@ -1004,6 +1004,19 @@ const anzhiyu = {
     // 切换标志位
   //   changeMusicListFlag = !changeMusicListFlag;
   // },
+  getLrcStyle: function () {
+    let e = setInterval((()=>{
+        var t;
+        if (t = "/music/" == window.location.pathname ? document.querySelector("#anMusic-page .aplayer-lrc-contents > p:nth-child(2)") : document.querySelector("#nav-music .aplayer-lrc-contents > p:nth-child(2)")) {
+            if (!document.documentMode) {
+                var n = getComputedStyle(t, null);
+                lrcFontHeight = Number(n.height.replace("px", "")) + Number(n.marginBottom.replace("px", ""))
+            }
+            clearInterval(e)
+        }
+    }
+    ), 600)
+  },
   // 控制台音乐列表监听
   addEventListenerConsoleMusicList: function () {
     const navMusic = document.getElementById("nav-music");
@@ -1033,7 +1046,6 @@ const anzhiyu = {
       toPageButton.href = "javascript:void(0);";
     }
   },
-
   //删除多余的class
   removeBodyPaceClass: function () {
     document.body.className = "pace-done";

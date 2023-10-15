@@ -154,7 +154,6 @@ var changeRadioCounter = 0;
 // 当前默认播放列表
 var defaultPlayMusicList = [];
 var themeColorMeta, pageHeaderEl, navMusicEl, consoleEl;
-
 document.addEventListener("DOMContentLoaded", function () {
   let headerContentWidth, $nav, $rightMenu;
   let mobileSidebarOpen = false;
@@ -1821,6 +1820,7 @@ document.addEventListener("DOMContentLoaded", function () {
     anzhiyu.getCustomRadioPlayList();
     anzhiyu.addEventListenerConsoleMusicList(false);
     anzhiyu.initPaginationObserver();
+    // anzhiyu.getLrcStyle();
 
     setTimeout(() => {
       setInputFocusListener();

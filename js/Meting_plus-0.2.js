@@ -51,7 +51,7 @@ class MetingJSElement extends HTMLElement {
     }
     this.config = config
 
-    this.api = this.meta.api || window.meting_api || 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r'
+    this.api = this.meta.api || window.meting_api || 'https://mtg.d-bood.top/?server=:server&type=:type&id=:id&r=:r'
     this.pllstapi = 'https://neclmu.d-bood.top/dj/:type?rid=:id&r=:r'
     this.skipLoadPlayer = false
     if (this.meta.auto) this._parse_link()
@@ -118,7 +118,9 @@ class MetingJSElement extends HTMLElement {
     fetch(url)
       .then(res => res.json())
       .then(result => {
+        console.log(result)
         if (this.skipLoadPlayer) {
+          console.log(result)
           const anMusicPage = document.getElementById("anMusic-page")
           const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
           metingAplayer.list.clear()
