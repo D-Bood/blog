@@ -838,7 +838,7 @@
                                                         lyrics: t.parsed[e]
                                                     }), t.update(0), t.current = t.parsed[e])
                                             };
-                                            var i = this.player.list.audios[e].lrc;
+                                            var i = this.player.list.audios[e].lrc.replace(/http/, "https");
                                             n.open("get", i, !0),
                                             n.send(null)
                                         } else

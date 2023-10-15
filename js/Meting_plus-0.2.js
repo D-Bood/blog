@@ -118,7 +118,7 @@ class MetingJSElement extends HTMLElement {
     fetch(url)
       .then(res => res.json())
       .then(result => {
-        console.log(result)
+        result
         if (this.skipLoadPlayer) {
           console.log(result)
           const anMusicPage = document.getElementById("anMusic-page")
