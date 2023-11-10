@@ -8,6 +8,7 @@ var $bodyWrap = document.getElementById("body-wrap");
 var anzhiyu_intype = false;
 var anzhiyu_keyUpEvent_timeoutId = null;
 var anzhiyu_keyUpShiftDelayEvent_timeoutId = null;
+var lrcFontHeight = 0;
 
 var popupWindowTimer = null;
 
@@ -844,7 +845,7 @@ document.addEventListener("DOMContentLoaded", function () {
       $body.classList.add("read-mode");
       const newEle = document.createElement("button");
       newEle.type = "button";
-      newEle.className = "fas fa-sign-out-alt exit-readmode";
+      newEle.className = "anzhiyufont anzhiyu-icon-xmark exit-readmode";
       $body.appendChild(newEle);
 
       const clickFn = () => {
@@ -1820,7 +1821,6 @@ document.addEventListener("DOMContentLoaded", function () {
     anzhiyu.getCustomRadioPlayList();
     anzhiyu.addEventListenerConsoleMusicList(false);
     anzhiyu.initPaginationObserver();
-    // anzhiyu.getLrcStyle();
 
     setTimeout(() => {
       setInputFocusListener();

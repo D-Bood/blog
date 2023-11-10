@@ -17,7 +17,6 @@ class MetingJSElement extends HTMLElement {
       if (this.meta.choice == 'radio') {
         this._parseRadio()
       }
-      this._listenButton()
     }
   }
 
@@ -211,23 +210,41 @@ class MetingJSElement extends HTMLElement {
     options.container = div
     this.appendChild(div)
 
+    console.log(options)
     this.aplayer = new APlayer(options)
+    if(window.matchMedia("(max-width: 768px)")) {
+      this.aplayer.container.querySelector(".aplayer-body").classList.add("aplayer-body-float");
+      this.aplayer.container.querySelector(".aplayer-pic-container").classList.add("aplayer-pic-container-float");
+      this.aplayer.container.querySelector(".aplayer-info").classList.add("aplayer-info-float");
+      this.aplayer.container.querySelector(".anMusicBtnBox").classList.add("anMusicBtnBox-hide");
+    }
+    this.aplayer.container.querySelector('.aplayer-icon-lrc').classList.add('aplayer-icon-lrc-inactivity')
+    this.aplayer.lrc.toggle()
+    this._listenButton()
   }
   
   _listenButton() {
     if (window.location.pathname == '/music/' || window.location.pathname == '/radio/') {
-      const anMusicPage = document.getElementById("anMusic-page")
-      const anMusicBtnGetSong = anMusicPage.querySelector("#anMusicBtnGetSong")
-      const anMusicRefreshBtn = anMusicPage.querySelector("#anMusicRefreshBtn")
-      const anMusicSwitchingBtn = anMusicPage.querySelector("#anMusicSwitching")
-      anMusicBtnGetSong.onclick = () => {this._randomPlay(anMusicPage)}
-      anMusicRefreshBtn.onclick = () => {this._refreshPlaylist(anMusicPage)}
+      const aplayerPage = document.getElementsByClassName("aplayer")[0]
+      const anMusicBtnGetSong = aplayerPage.querySelector("#anMusicBtnGetSong")
+      const anMusicRefreshBtn = aplayerPage.querySelector("#anMusicRefreshBtn")
+      const anMusicSwitchingBtn = aplayerPage.querySelector("#anMusicSwitching")
+      anMusicBtnGetSong.onclick = () => {this._randomPlay()}
+      anMusicRefreshBtn.onclick = () => {this._refreshPlaylist()}
       anMusicSwitchingBtn.onclick = () => {
         if (window.location.pathname == '/music/') {this._changeMusicList('/json/music.json', 'musicDataList')}
         if (window.location.pathname == '/radio/') {this._changeMusicList('/json/radio.json', 'radioDataList')}
       }
     }
   }
+  
+  _listenWindowSize() {
+    const anMusicPage = document.getElementById("anMusic-page")
+    anMusicPage.addEventListener('resize', () => {
+      anMusicPage.style['--vh'] = window.innerHeight;
+    })
+  }
+  
   async _changeMusicList(url, dataname) {
     const anMusicPage = document.getElementById("anMusic-page")
     const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
@@ -253,7 +270,7 @@ class MetingJSElement extends HTMLElement {
       songs = cacheData.songs
     }
     if (window.location.pathname == '/music/') {
-      if (songs.length > 0 && changeMusicListFlag) {
+      if (songs && changeMusicListFlag) {
         this.meta.type = 'custom'
         metingAplayer.list.clear()
         metingAplayer.list.add(songs)
@@ -278,14 +295,14 @@ class MetingJSElement extends HTMLElement {
       this._parseRadio()
     }
   }
-  _randomPlay(anMusicPage) {
-    const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
+  _randomPlay() {
+    const metingAplayer = this.aplayer
     const allAudios = metingAplayer.list.audios
     const randomIndex = Math.floor(Math.random() * allAudios.length)
     // 随机播放一首
     metingAplayer.list.switch(randomIndex)
   }
-  _refreshPlaylist(anMusicPage) {
+  _refreshPlaylist() {
     this.skipLoadPlayer = true
     if (this.meta.type == 'custom') {anzhiyu.snackbarShow("非常抱歉，自定义播放列表暂不支持刷新操作")}
     else {
