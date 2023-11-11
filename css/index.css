@@ -8255,6 +8255,9 @@ body:has(#console.show) #nav-music {
   body[data-type="music"] #page {
     z-index: auto;
   }
+  body[data-type="music"] .not-top-img {
+    height: 0 !important;
+  }
   #page {
     margin-top: -35px !important;
   }
