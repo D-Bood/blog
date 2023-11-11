@@ -8274,7 +8274,7 @@ body:has(#console.show) #nav-music {
     -ms-flex-align: center;
     -webkit-align-items: center;
     align-items: center;
-    min-height: 70vh;
+    min-height: 50vh;
   }
   #anMusic-page meting-js .aplayer .aplayer-body-float {
     -webkit-box-orient: horizontal;
@@ -8324,7 +8324,7 @@ body:has(#console.show) #nav-music {
     width: 92vw;
     left: 0;
     backdrop-filter: contrast(0.5);
-    height: 55vh !important;
+    height: 45.7vh !important;
     min-height: auto !important;
     border-radius: 15px;
     padding: 15px 0px;
@@ -8383,7 +8383,7 @@ body:has(#console.show) #nav-music {
     min-height: auto !important;
     position: relative;
     left: 0;
-    height: 55vh !important;
+    height: 45.7vh !important;
     backdrop-filter: contrast(0.5);
     border-radius: 15px;
     padding: 0 15px;
