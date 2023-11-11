@@ -8249,7 +8249,7 @@ body:has(#console.show) #nav-music {
 }
 @media screen and (max-width: 768px) {
   body[data-type="music"] #body-wrap {
-    min-height: auto;
+    position: absolute;
   }
   body[data-type="music"] #rightside {
     display: none;
