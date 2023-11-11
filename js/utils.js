@@ -906,7 +906,7 @@ const anzhiyu = {
     // });
 
     function anMusicPageMenuAask() {
-      if (window.location.pathname != "/music/" && window.location.pathname !="/radio/") {
+      if (window.location.pathname !== "/music/" && window.location.pathname !== "/radio/") {
         document.getElementById("menu-mask").removeEventListener("click", anMusicPageMenuAask);
         return;
       }
@@ -921,16 +921,30 @@ const anzhiyu = {
         anMusicPage.querySelector(".aplayer-body").classList.add("aplayer-body-float");
         anMusicPage.querySelector(".aplayer-pic-container").classList.add("aplayer-pic-container-float");
         anMusicPage.querySelector(".aplayer-info").classList.add("aplayer-info-float");
+        anMusicPage.querySelector(".info-container").classList.add("info-container-float");
         anMusicPage.querySelector(".anMusicBtnBox").classList.add("anMusicBtnBox-hide");
       } else {
         anMusicPage.querySelector(".aplayer-body").classList.remove("aplayer-body-float");
         anMusicPage.querySelector(".aplayer-pic-container").classList.remove("aplayer-pic-container-float");
         anMusicPage.querySelector(".aplayer-info").classList.remove("aplayer-info-float");
+        anMusicPage.querySelector(".info-container").classList.remove("info-container-float");
         anMusicPage.querySelector(".anMusicBtnBox").classList.remove("anMusicBtnBox-hide");
       }
     }
     document.getElementById("aplayer-menu").addEventListener("click", metingAplayerAlbum);
     document.getElementById("aplayer-lrc").addEventListener("click", metingAplayerAlbum);
+
+    let mq = window.matchMedia("(max-width: 768px)");
+    function pagePaddingChange(e) {
+      if (window.location.pathname == "/music/" || window.location.pathname == "/radio/") {
+        if (e.matches) {
+          document.getElementById("page").style.setProperty('padding', '0', 'important'); // padding = "0 !important";
+        } else {
+          document.getElementById("page").style.setProperty('padding', '20px 15px', 'important'); //padding = "20px 15px !important";
+        }
+      }
+    }
+    document.addEventListener('loaded', pagePaddingChange(mq));
 
     // 监听增加单曲按钮
     // anMusicBtnGetSong.addEventListener("click", () => {

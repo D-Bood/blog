@@ -216,6 +216,7 @@ class MetingJSElement extends HTMLElement {
       this.aplayer.container.querySelector(".aplayer-body").classList.add("aplayer-body-float");
       this.aplayer.container.querySelector(".aplayer-pic-container").classList.add("aplayer-pic-container-float");
       this.aplayer.container.querySelector(".aplayer-info").classList.add("aplayer-info-float");
+      this.aplayer.container.querySelector(".info-container").classList.add("info-container-float");
       this.aplayer.container.querySelector(".anMusicBtnBox").classList.add("anMusicBtnBox-hide");
     }
     this.aplayer.container.querySelector('.aplayer-icon-lrc').classList.add('aplayer-icon-lrc-inactivity')
