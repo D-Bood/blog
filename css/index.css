@@ -8249,7 +8249,7 @@ body:has(#console.show) #nav-music {
 }
 @media screen and (max-width: 768px) {
   body[data-type="music"] #body-wrap {
-    position: absolute;
+    position: relative;
   }
   body[data-type="music"] #rightside {
     display: none;
@@ -8281,6 +8281,10 @@ body:has(#console.show) #nav-music {
     align-items: center;
     min-height: 50vh;
   }
+  #page meting-js .aplayer .aplayer-body,
+  #anMusic-page meting-js .aplayer .aplayer-body {
+    min-height: calc(130px + 50vh);
+  }
   #page meting-js .aplayer .aplayer-body-float,
   #anMusic-page meting-js .aplayer .aplayer-body-float {
     -webkit-box-orient: horizontal;
@@ -8303,6 +8307,7 @@ body:has(#console.show) #nav-music {
     border-radius: 15px;
     width: 86vw !important;
     padding: 0 3vw;
+    min-height: auto !important;
   }
   #page meting-js .aplayer .aplayer-pic-container-float,
   #anMusic-page meting-js .aplayer .aplayer-pic-container-float {
@@ -8326,7 +8331,7 @@ body:has(#console.show) #nav-music {
   }
   #page meting-js .aplayer .aplayer-top-right,
   #anMusic-page meting-js .aplayer .aplayer-top-right {
-    margin: 1em 0 0 0 !important;
+    margin: 10px 0 0 0 !important;
   }
   #page meting-js .aplayer .aplayer-list,
   #anMusic-page meting-js .aplayer .aplayer-list {
