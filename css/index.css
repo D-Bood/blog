@@ -7968,6 +7968,8 @@ body:has(#console.show) #nav-music {
 }
 #anMusic-page meting-js .aplayer .aplayer-top .aplayer-top-right .aplayer-list ol > li .li-middle {
   position: relative;
+  overflow: hidden;
+  white-space: nowrap;
 }
 #anMusic-page meting-js .aplayer .aplayer-top .aplayer-top-right .aplayer-list ol > li .li-right {
   position: relative;
