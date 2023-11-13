@@ -8351,7 +8351,7 @@ body:has(#console.show) #nav-music {
   }
   #page meting-js .aplayer .aplayer-list ol,
   #anMusic-page meting-js .aplayer .aplayer-list ol {
-    max-height: 50vh !important;
+    max-height: calc(50vh - 40px) !important;
     padding-right: 0px;
   }
   #page meting-js .aplayer .aplayer-list ol > li,

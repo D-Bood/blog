@@ -938,9 +938,9 @@ const anzhiyu = {
     function pagePaddingChange(e) {
       if (window.location.pathname == "/music/" || window.location.pathname == "/radio/") {
         if (e.matches) {
-          document.getElementById("page").style.setProperty('padding', '0', 'important'); // padding = "0 !important";
+          document.getElementsByClassName("page")[0].style.setProperty('padding', '0', 'important'); // padding = "0 !important";
         } else {
-          document.getElementById("page").style.setProperty('padding', '20px 15px', 'important'); //padding = "20px 15px !important";
+          return; // document.getElementsByClassName("page")[0].style.setProperty('padding', '20px 15px', 'important'); //padding = "20px 15px !important";
         }
       }
     }
