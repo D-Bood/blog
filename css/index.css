@@ -7566,6 +7566,7 @@ body[data-type="post"] #popup-window.popup-hide {
 }
 body[data-type="music"] {
   background: #0d0d0d;
+  height: 100%;
 }
 body[data-type="music"] #body-wrap {
   -webkit-box-pack: center;
