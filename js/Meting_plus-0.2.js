@@ -149,13 +149,14 @@ class MetingJSElement extends HTMLElement {
           lrc: "",
           pic: "",
           title: "",
-          url: ""
+          url: "",
+          id: ""
         }
         count['author'] = pllstdata.programs[i].dj.nickname
         count['lrc'] = '[00:00.00]\u200B' + pllstdata.programs[i].description
         count['pic'] = pllstdata.programs[i].coverUrl
         count['title'] = pllstdata.programs[i].name
-        this.rid = pllstdata.programs[i].mainTrackId
+        count['id'] = this.rid = pllstdata.programs[i].mainTrackId
         let songurl = 'https://neclmu.d-bood.top/song/url?id=:rid&r=:r'
           .replace(':rid', this.rid)
           .replace(':r', Math.random())

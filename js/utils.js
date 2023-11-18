@@ -851,9 +851,9 @@ const anzhiyu = {
     if (urlParams.get("id") && urlParams.get("server")) {
       const id = urlParams.get("id");
       const server = urlParams.get("server");
-      anMusicPageMeting.innerHTML = `<meting-js id="${id}" server=${server} type="playlist" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 320px)" choice="music"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${id}" server=${server} type="playlist" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 300px)" lrc-max-height="calc(100vh - 250px)" choice="music"></meting-js>`;
     } else {
-      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 320px)" choice="music"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" server="${userServer}" type="playlist" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 300px)" lrc-max-height="calc(100vh - 250px)" choice="music"></meting-js>`;
     }
     anzhiyu.changeMusicBg(false);
   },
@@ -867,9 +867,9 @@ const anzhiyu = {
     const anMusicPageMeting = document.getElementById("anMusic-page-meting");
     if (urlParams.get("id")) {
       const id = urlParams.get("id");
-      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 320px)" choice="radio"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${id}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 300px)" lrc-max-height="calc(100vh - 250px)" choice="radio"></meting-js>`;
     } else {
-      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 320px)" choice="radio"></meting-js>`;
+      anMusicPageMeting.innerHTML = `<meting-js id="${userId}" type="program" mutex="true" preload="auto" theme="var(--anzhiyu-main)" order="list" list-max-height="calc(100vh - 300px)" lrc-max-height="calc(100vh - 250px)" choice="radio"></meting-js>`;
     }
     anzhiyu.changeMusicBg(false);
   },
@@ -888,10 +888,7 @@ const anzhiyu = {
   // 监听音乐背景改变
   addEventListenerMusic: function () {
     const anMusicPage = document.getElementById("anMusic-page");
-    // const aplayerIconMenu = anMusicPage.querySelector(".aplayer-info .aplayer-time .aplayer-icon-menu");
-    const anMusicBtnGetSong = anMusicPage.querySelector("#anMusicBtnGetSong");
-    const anMusicRefreshBtn = anMusicPage.querySelector("#anMusicRefreshBtn");
-    const anMusicSwitchingBtn = anMusicPage.querySelector("#anMusicSwitching");
+    const aplayerIconMenu = anMusicPage.querySelector(".aplayer-info .aplayer-time .aplayer-icon-menu");
     const metingAplayer = anMusicPage.querySelector("meting-js").aplayer;
     //初始化音量
     metingAplayer.volume(0.8, true);
@@ -899,11 +896,11 @@ const anzhiyu = {
       anzhiyu.changeMusicBg();
     });
 
-    // aplayerIconMenu.addEventListener("click", function () {
-    //   document.getElementById("menu-mask").style.display = "block";
-    //   document.getElementById("menu-mask").style.animation = "0.5s ease 0s 1 normal none running to_show";
-    //   anMusicPage.querySelector(".aplayer.aplayer-withlist .aplayer-list").style.opacity = "1";
-    // });
+    aplayerIconMenu.addEventListener("click", function () {
+      document.getElementById("menu-mask").style.display = "block";
+      document.getElementById("menu-mask").style.animation = "0.5s ease 0s 1 normal none running to_show";
+      anMusicPage.querySelector(".aplayer.aplayer-withlist .aplayer-list").style.opacity = "1";
+    });
 
     function anMusicPageMenuAask() {
       if (window.location.pathname !== "/music/" && window.location.pathname !== "/radio/") {
