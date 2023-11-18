@@ -7812,8 +7812,8 @@ body:has(#console.show) #nav-music {
   display: -ms-flexbox;
   display: box;
   display: flex;
-  width: 50px;
-  height: 50px;
+  width: 2rem;
+  height: 2rem;
   padding: 5px;
   background: var(--anzhiyu-white-op);
   backdrop-filter: saturate(180%) blur(20px);
