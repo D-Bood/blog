@@ -896,22 +896,22 @@ const anzhiyu = {
       anzhiyu.changeMusicBg();
     });
 
-    aplayerIconMenu.addEventListener("click", function () {
-      document.getElementById("menu-mask").style.display = "block";
-      document.getElementById("menu-mask").style.animation = "0.5s ease 0s 1 normal none running to_show";
-      anMusicPage.querySelector(".aplayer.aplayer-withlist .aplayer-list").style.opacity = "1";
-    });
+    // aplayerIconMenu.addEventListener("click", function () {
+    //   document.getElementById("menu-mask").style.display = "block";
+    //   document.getElementById("menu-mask").style.animation = "0.5s ease 0s 1 normal none running to_show";
+    //   anMusicPage.querySelector(".aplayer.aplayer-withlist .aplayer-list").style.opacity = "1";
+    // });
 
-    function anMusicPageMenuAask() {
-      if (window.location.pathname !== "/music/" && window.location.pathname !== "/radio/") {
-        document.getElementById("menu-mask").removeEventListener("click", anMusicPageMenuAask);
-        return;
-      }
+    // function anMusicPageMenuAask() {
+    //   if (window.location.pathname !== "/music/" && window.location.pathname !== "/radio/") {
+    //     document.getElementById("menu-mask").removeEventListener("click", anMusicPageMenuAask);
+    //     return;
+    //   }
 
-      anMusicPage.querySelector(".aplayer-list").classList.remove("aplayer-list-hide");
-    }
+    //   anMusicPage.querySelector(".aplayer-list").classList.remove("aplayer-list-hide");
+    // }
 
-    document.getElementById("menu-mask").addEventListener("click", anMusicPageMenuAask);
+    // document.getElementById("menu-mask").addEventListener("click", anMusicPageMenuAask);
 
     function metingAplayerAlbum() {
       if (!anMusicPage.querySelector('.aplayer-top-right').classList.contains('aplayer-top-right-hide')) {
