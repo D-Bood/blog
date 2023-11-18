@@ -8314,7 +8314,7 @@ body:has(#console.show) #nav-music {
   }
   #page meting-js .aplayer .aplayer-body,
   #anMusic-page meting-js .aplayer .aplayer-body {
-    min-height: calc(130px + 50vh) !important;
+    min-height: calc(120px + 50vh) !important;
   }
   #page meting-js .aplayer .aplayer-body-float,
   #anMusic-page meting-js .aplayer .aplayer-body-float {
