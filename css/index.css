@@ -8068,7 +8068,7 @@ body:has(#console.show) #nav-music {
 #anMusic-page meting-js .aplayer .aplayer-controller {
 /*float: left;*/
   max-width: 1500px;
-  margin: 25px 0;
+  margin: 25px auto;
   width: 92vw;
   position: relative;
 }

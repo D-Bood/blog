@@ -119,6 +119,7 @@ class MetingJSElement extends HTMLElement {
       .then(result => {
         result
         if (this.skipLoadPlayer) {
+          console.log(result)
           const anMusicPage = document.getElementById("anMusic-page")
           const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
           metingAplayer.list.clear()
@@ -137,46 +138,44 @@ class MetingJSElement extends HTMLElement {
     const pllstres = await fetch(pllsturl)
     const pllstdata = pllstres.json()
     return pllstdata
-  }
+    }
 
-  async _fetchProgramUrl(item) {
-    let count = {
-      author: "",
-      lrc: "",
-      pic: "",
-      title: "",
-      url: "",
-      id: ""
-    }
-    count['author'] = item.dj.nickname
-    count['lrc'] = '[00:00.00]\u200B' + item.description
-    count['pic'] = item.coverUrl
-    count['title'] = item.name
-    count['id'] = this.rid = item.mainTrackId
-    let programApi = 'https://meting.qjqq.cn/?server=netease&type=song&id=:rid&r=:r'
-      .replace(':rid', this.rid)
-      .replace(':r', Math.random())
-    let programUrlSource = await fetch(programApi)
-    let programUrlData = await programUrlSource.json()
-    count['url'] = programUrlData[0].url
-    return count
-  }
-
-  async _parseRadio() {
-    const djplaylist = []
-    let pllstdata = await this._fetchRadioPlaylist()
-    for (let item of pllstdata.programs) {
-      let res = await this._fetchProgramUrl(item)
-      djplaylist.push(res)
-    }
-    if (this.skipLoadPlayer) {
-      const anMusicPage = document.getElementById("anMusic-page")
-      const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
-      metingAplayer.list.clear()
-      metingAplayer.list.add(djplaylist)
-    } else {
-      this._loadPlayer(djplaylist)
-    }
+  _parseRadio() {
+    this._fetchRadioPlaylist().then(pllstdata => {
+      const djplaylist = []
+      for (var i = 0; i <= pllstdata.programs.length - 1; i++) {
+        const count = {
+          author: "",
+          lrc: "",
+          pic: "",
+          title: "",
+          url: "",
+          id: ""
+        }
+        count['author'] = pllstdata.programs[i].dj.nickname
+        count['lrc'] = '[00:00.00]\u200B' + pllstdata.programs[i].description
+        count['pic'] = pllstdata.programs[i].coverUrl
+        count['title'] = pllstdata.programs[i].name
+        count['id'] = this.rid = pllstdata.programs[i].mainTrackId
+        let songurl = 'https://neclmu.d-bood.top/song/url?id=:rid&r=:r'
+          .replace(':rid', this.rid)
+          .replace(':r', Math.random())
+        fetch(songurl)
+          .then(data1 => data1.json())
+          .then(res1 => {
+            count['url'] = res1.data[0].url.replace(/http/, 'https')
+          })
+        djplaylist.push(count)
+      }
+        if (this.skipLoadPlayer) {
+          const anMusicPage = document.getElementById("anMusic-page")
+          const metingAplayer = anMusicPage.querySelector("meting-js").aplayer
+          metingAplayer.list.clear()
+          metingAplayer.list.add(djplaylist)
+        } else {
+          this._loadPlayer(djplaylist)
+        }
+    })
   }
 
   _loadPlayer(data) {
