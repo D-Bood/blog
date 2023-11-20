@@ -139,35 +139,24 @@ class MetingJSElement extends HTMLElement {
     return pllstdata
   }
 
-  async _fetchProgramUrl(item) {
-    let count = {
-      author: "",
-      lrc: "",
-      pic: "",
-      title: "",
-      url: "",
-      id: ""
-    }
-    count['author'] = item.dj.nickname
-    count['lrc'] = '[00:00.00]\u200B' + item.description
-    count['pic'] = item.coverUrl
-    count['title'] = item.name
-    count['id'] = this.rid = item.mainTrackId
-    let programApi = 'https://meting.qjqq.cn/?server=netease&type=song&id=:rid&r=:r'
-      .replace(':rid', this.rid)
-      .replace(':r', Math.random())
-    let programUrlSource = await fetch(programApi)
-    let programUrlData = await programUrlSource.json()
-    count['url'] = programUrlData[0].url
-    return count
-  }
-
   async _parseRadio() {
     const djplaylist = []
     let pllstdata = await this._fetchRadioPlaylist()
     for (let item of pllstdata.programs) {
-      let res = await this._fetchProgramUrl(item)
-      djplaylist.push(res)
+      let count = {
+        author: "",
+        lrc: "",
+        pic: "",
+        title: "",
+        id: "",
+        type: "fetchUrl"
+      }
+      count['author'] = item.dj.nickname
+      count['lrc'] = '[00:00.00]\u200B' + item.description
+      count['pic'] = item.coverUrl
+      count['title'] = item.name
+      count['id'] = item.mainTrackId
+      djplaylist.push(count)
     }
     if (this.skipLoadPlayer) {
       const anMusicPage = document.getElementById("anMusic-page")
@@ -202,19 +191,13 @@ class MetingJSElement extends HTMLElement {
       ...defaultOption,
       ...this.config,
       customAudioType: {
-        'fetchUrl': function (audioElement, audio, player) {
-          let 
-          if (Hls.isSupported()) {
-            const hls = new Hls();
-            hls.loadSource(audio.url);
-            hls.attachMedia(audioElement);
-          }
-          else if (audioElement.canPlayType('application/x-mpegURL') || audioElement.canPlayType('application/vnd.apple.mpegURL')) {
-            audioElement.src = audio.url;
-          }
-          else {
-            player.notice('Error: HLS is not supported.');
-          }
+        'fetchUrl': async function (audioElement, audio, player) {
+          let programApi = 'https://meting.qjqq.cn/?server=netease&type=song&id=:rid&r=:r'
+            .replace(':rid', audio.id)
+            .replace(':r', Math.random())
+          let res = await fetch(programApi)
+          let result = await res.json()
+          result[0].url == '' ? player.notice('Error: Cannot fetch song\'s url.') : audioElement.src = result[0].url
         }
       }
     }
