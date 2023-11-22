@@ -149,13 +149,17 @@ class MetingJSElement extends HTMLElement {
         pic: "",
         title: "",
         id: "",
-        type: "fetchUrl"
+        url: ""
       }
       count['author'] = item.dj.nickname
       count['lrc'] = '[00:00.00]\u200B' + item.description
       count['pic'] = item.coverUrl
       count['title'] = item.name
       count['id'] = item.mainTrackId
+      let url = 'https://meting.qjqq.cn/?server=netease&type=url&id=:rid&br=320&r=:r'
+        .replace(':rid', item.mainTrackId)
+        .replace(':r', Math.random())
+      count['url'] = url
       djplaylist.push(count)
     }
     if (this.skipLoadPlayer) {
@@ -190,16 +194,6 @@ class MetingJSElement extends HTMLElement {
     let options = {
       ...defaultOption,
       ...this.config,
-      customAudioType: {
-        'fetchUrl': async function (audioElement, audio, player) {
-          let programApi = 'https://meting.qjqq.cn/?server=netease&type=song&id=:rid&r=:r'
-            .replace(':rid', audio.id)
-            .replace(':r', Math.random())
-          let res = await fetch(programApi)
-          let result = await res.json()
-          result[0].url == '' ? player.notice('Error: Cannot fetch song\'s url.') : audioElement.src = result[0].url
-        }
-      }
     }
     for (let optkey in options) {
       if (options[optkey] === 'true' || options[optkey] === 'false') {
