@@ -10,6 +10,9 @@ var anzhiyu_keyUpEvent_timeoutId = null;
 var anzhiyu_keyUpShiftDelayEvent_timeoutId = null;
 var lrcFontHeight = 0;
 
+// 右键菜单对象
+var rm = null;
+
 var popupWindowTimer = null;
 
 var adjectives = [
@@ -704,7 +707,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const $cardTocLayout = document.getElementById("card-toc");
       $cardToc = $cardTocLayout.querySelector(".toc-content");
       $tocLink = $cardToc.querySelectorAll(".toc-link");
-      $tocPercentage = $cardTocLayout.querySelector(".toc-percentage");
       isExpand = $cardToc.classList.contains("is-expand");
 
       // toc元素點擊
@@ -1611,7 +1613,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (isEscapeKeyPressed) {
         anzhiyu.hideLoading();
         anzhiyu.hideConsole();
-        rm.hideRightMenu();
+        rm && rm.hideRightMenu();
       }
       const shortcutKeyDelay = GLOBAL_CONFIG.shortcutKey.delay ? GLOBAL_CONFIG.shortcutKey.delay : 100;
       const shortcutKeyShiftDelay = GLOBAL_CONFIG.shortcutKey.shiftDelay ? GLOBAL_CONFIG.shortcutKey.shiftDelay : 200;
