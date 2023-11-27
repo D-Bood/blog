@@ -7875,8 +7875,7 @@ body:has(#console.show) #nav-music {
   background-repeat: no-repeat;
   width: 200vw;
   height: 150vh;
-  top: -50vh;
-  left: -50vw;
+  top: -25vh;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
