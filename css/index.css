@@ -8576,6 +8576,10 @@ body:has(#console.show) #nav-music {
   #anMusic-page meting-js .aplayer .aplayer-list.aplayer-list-hide {
     bottom: 0% !important;
   }
+  #page meting-js .aplayer .aplayer-list .list-title,
+  #anMusic-page meting-js .aplayer .aplayer-list .list-title {
+    padding: 0 15px !important;
+  }
   #page meting-js .aplayer .aplayer-list ol,
   #anMusic-page meting-js .aplayer .aplayer-list ol {
     max-height: calc(50vh - 40px) !important;
@@ -8642,6 +8646,7 @@ body:has(#console.show) #nav-music {
     padding: 0 15px;
     width: 92vw;
     padding: 15px 0;
+    width: 92vw !important;
   }
   #page meting-js .aplayer .aplayer-lrc p,
   #anMusic-page meting-js .aplayer .aplayer-lrc p {
