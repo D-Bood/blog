@@ -8122,6 +8122,7 @@ body:has(#console.show) #nav-music {
   -webkit-flex: 1.5;
   -ms-flex: 1.5;
   flex: 1.5;
+  max-width: 50vw;
   margin-left: 2em;
 }
 #anMusic-page meting-js .aplayer .aplayer-top .aplayer-top-right .aplayer-list {
@@ -8558,6 +8559,7 @@ body:has(#console.show) #nav-music {
   #anMusic-page meting-js .aplayer .aplayer-top-right {
     margin: 10px 0 0 0 !important;
     width: auto !important;
+    max-width: none !important;
   }
   #page meting-js .aplayer .aplayer-list,
   #anMusic-page meting-js .aplayer .aplayer-list {
