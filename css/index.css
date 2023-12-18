@@ -7922,7 +7922,7 @@ body:has(#console.show) #nav-music {
   -webkit-justify-content: center;
   justify-content: center;
   height: 100%;
-  width: calc(1400px - 3rem);
+  width: calc(82vw - 3rem);
   max-width: 1440px;
   margin: 0 auto;
 /* min-height 640px */
@@ -8115,7 +8115,6 @@ body:has(#console.show) #nav-music {
   display: none;
 }
 #anMusic-page meting-js .aplayer .aplayer-top .aplayer-top-right {
-  width: 55vw;
   -webkit-box-flex: 1.5;
   -moz-box-flex: 1.5;
   -o-box-flex: 1.5;
@@ -8264,7 +8263,7 @@ body:has(#console.show) #nav-music {
 /*float: left;*/
   max-width: 1500px;
   margin: 25px auto;
-  width: calc(1430px - 3rem);
+  width: calc(84vw - 3rem);
   position: relative;
 }
 #anMusic-page meting-js .aplayer .aplayer-controller .ctrler-container {
